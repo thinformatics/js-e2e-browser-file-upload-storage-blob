@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/c22bbe25-3a64-4f59-b572-8476962e71f7/microsoft.web/sites/subscriptions/c22bbe25-3a64-4f59-b572-8476962e71f7/resourceGroups/rg-thin-image-gallery/providers/Microsoft.Web/sites/thin-image-gallery",
+    "appService.deploySubpath": "."
+}
