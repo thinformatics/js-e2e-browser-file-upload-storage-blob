@@ -64,7 +64,7 @@ const App = (): JSX.Element => {
           return (
             <li className='list-group-item' key={item}>
               <div>
-                <a href={`${Path.dirname(item)}/${Path.basename(item)}`} target='_blank'>{Path.basename(item)}</a>
+                <a href={`${Path.dirname(item)}/${Path.basename(item)}`} target='_blank' rel='noreferrer'>{Path.basename(item)}</a>
                 <br />
                 <img className='img-thumbnail' src={item} alt={item} height="200" />
               </div>
