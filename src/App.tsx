@@ -42,24 +42,31 @@ const App = (): JSX.Element => {
   const DisplayForm = () => (
     <div>
       <input type="file" onChange={onFileChange} key={inputKey || ''} />
-      <button type="submit" onClick={onFileUpload}>
+      <button className='btn btn-secondary' type="submit" onClick={onFileUpload}>
         Upload!
           </button>
     </div>
   )
 
+
+//<div class="p-5 bg-primary text-white text-center">
+//  <h1>My First Bootstrap 5 Page</h1>
+//  <p>Resize this responsive page to see the effect!</p> 
+//</div>
+
+
   // display file name and image
   const DisplayImagesFromContainer = () => (
-    <div>
-      <h2>Container items</h2>
-      <ul>
+    <div p-5 bg-primary text-white text-center>
+        <h2>upload done!</h2>
+      <ul className='list-group'>
         {blobList.map((item) => {
           return (
-            <li key={item}>
+            <li className='list-group-item' key={item}>
               <div>
-                {Path.basename(item)}
+                <a href={`${Path.dirname(item)}/${Path.basename(item)}`} target='_blank'>{Path.basename(item)}</a>
                 <br />
-                <img src={item} alt={item} height="200" />
+                <img className='img-thumbnail' src={item} alt={item} height="200" />
               </div>
             </li>
           );
@@ -69,11 +76,12 @@ const App = (): JSX.Element => {
   );
 
   return (
-    <div>
-      <h1>Upload file to Azure Blob Storage</h1>
+    <div className='p-5 bg-primary text-white text-center'>
+      <h1>Upload file to thin image gallery</h1><br/>
+    
       {storageConfigured && !uploading && DisplayForm()}
       {storageConfigured && uploading && <div>Uploading</div>}
-      <hr />
+      
       {storageConfigured && blobList.length > 0 && DisplayImagesFromContainer()}
       {!storageConfigured && <div>Storage is not configured.</div>}
     </div>
