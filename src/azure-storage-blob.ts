@@ -1,5 +1,16 @@
 // ./src/azure-storage-blob.ts
 
+function makeid(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * 
+charactersLength));
+ }
+ return result;
+}
+
 // <snippet_package>
 // THIS IS SAMPLE CODE ONLY - NOT MEANT FOR PRODUCTION USE
 import { BlobServiceClient, ContainerClient} from '@azure/storage-blob';
@@ -38,7 +49,9 @@ const getBlobsInContainer = async (containerClient: ContainerClient) => {
 const createBlobInContainer = async (containerClient: ContainerClient, file: File) => {
   
   // create blobClient for container
-  const blobClient = containerClient.getBlockBlobClient(file.name);
+  //const blobClient = containerClient.getBlockBlobClient(file.name);
+  const randomblobname = makeid(8);
+  const blobClient = containerClient.getBlockBlobClient(randomblobname);
 
   // set mimetype as determined from browser with file upload control
   const options = { blobHTTPHeaders: { blobContentType: file.type } };
