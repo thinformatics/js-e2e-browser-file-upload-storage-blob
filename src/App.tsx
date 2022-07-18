@@ -58,7 +58,7 @@ const App = (): JSX.Element => {
   // display file name and image
   const DisplayImagesFromContainer = () => (
     <div p-5 bg-primary text-white text-center>
-        <h2>upload done!</h2>
+        <h2>Images in the contrainer from today</h2>
       <ul className='list-group'>
         {blobList.map((item) => {
           return (
@@ -77,7 +77,7 @@ const App = (): JSX.Element => {
 
   return (
     <div className='p-5 bg-primary text-white text-center'>
-      <h1>Upload file to thin image gallery</h1><br/>
+      <h1>thin*image gallery</h1><br/>
     
       {storageConfigured && !uploading && DisplayForm()}
       {storageConfigured && uploading && <div>Uploading</div>}

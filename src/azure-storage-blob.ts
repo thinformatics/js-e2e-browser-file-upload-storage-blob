@@ -1,21 +1,13 @@
 // ./src/azure-storage-blob.ts
 
-function makeid(length) {
-  var result           = '';
-  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
-    result += characters.charAt(Math.floor(Math.random() * 
-charactersLength));
- }
- return result;
-}
-
 // <snippet_package>
 // THIS IS SAMPLE CODE ONLY - NOT MEANT FOR PRODUCTION USE
 import { BlobServiceClient, ContainerClient} from '@azure/storage-blob';
 
-const containerName = `images`;
+const now = new Date();
+const containerName = `${now.getFullYear()}-${now.getUTCMonth()+1}-${now.getUTCDate()}`;
+
+//const containerName = `images`;
 const sasToken = process.env.REACT_APP_STORAGESASTOKEN;
 const storageAccountName = process.env.REACT_APP_STORAGERESOURCENAME; 
 // </snippet_package>
@@ -50,7 +42,20 @@ const createBlobInContainer = async (containerClient: ContainerClient, file: Fil
   
   // create blobClient for container
   //const blobClient = containerClient.getBlockBlobClient(file.name);
-  const randomblobname = makeid(8);
+  
+  class Guid {
+    static newGuid() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0,
+          v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+  }
+  
+  const fileExt = file.name.substr(file.name.lastIndexOf('.') + 1);
+
+  const randomblobname = `${Guid.newGuid()}.${fileExt}`;
   const blobClient = containerClient.getBlockBlobClient(randomblobname);
 
   // set mimetype as determined from browser with file upload control
