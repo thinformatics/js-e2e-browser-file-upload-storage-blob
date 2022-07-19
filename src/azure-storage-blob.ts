@@ -4,6 +4,9 @@
 // THIS IS SAMPLE CODE ONLY - NOT MEANT FOR PRODUCTION USE
 import { BlobServiceClient, ContainerClient} from '@azure/storage-blob';
 
+//import Guid Genrator
+import { Guid } from "guid-typescript";
+
 const now = new Date();
 const containerName = `${now.getFullYear()}-${now.getUTCMonth()+1}-${now.getUTCDate()}`;
 
@@ -42,20 +45,10 @@ const createBlobInContainer = async (containerClient: ContainerClient, file: Fil
   
   // create blobClient for container
   //const blobClient = containerClient.getBlockBlobClient(file.name);
-  
-  class Guid {
-    static newGuid() {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0,
-          v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-      });
-    }
-  }
-  
+    
   const fileExt = file.name.substr(file.name.lastIndexOf('.') + 1);
 
-  const randomblobname = `${Guid.newGuid()}.${fileExt}`;
+  const randomblobname = `${Guid.create()}.${fileExt}`;
   const blobClient = containerClient.getBlockBlobClient(randomblobname);
 
   // set mimetype as determined from browser with file upload control
