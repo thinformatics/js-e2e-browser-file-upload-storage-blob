@@ -1,4 +1,4 @@
-//Version 31.05.2024
+//Version 31.05.2024 v.1
 // ./src/App.tsx
 
 import React, { useState } from 'react';
